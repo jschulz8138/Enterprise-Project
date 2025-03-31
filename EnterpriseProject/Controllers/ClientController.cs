@@ -1,9 +1,11 @@
 using System.Diagnostics;
 using EnterpriseProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnterpriseProject.Controllers
 {
+    [Authorize(Roles = "Client")]
     public class ClientController : Controller
     {
         private readonly ILogger<ClientController> _logger;
@@ -11,6 +13,10 @@ namespace EnterpriseProject.Controllers
         public ClientController(ILogger<ClientController> logger)
         {
             _logger = logger;
+        }
+        public IActionResult List()
+        {
+            return View();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Data;
 using System.Diagnostics;
 using EnterpriseProject.Entities;
 using EnterpriseProject.Models;
@@ -37,12 +38,32 @@ namespace EnterpriseProject.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    // Get the user
+                    var user = await _userManager.FindByNameAsync(model.Username);
+
+                    // Get the user's roles
+                    var roles = await _userManager.GetRolesAsync(user);
+
+                    // Check the roles and redirect accordingly
+                    if (roles.Contains("Admin"))
                     {
-                        return Redirect(model.ReturnUrl);
+                        return RedirectToAction("List", "Admin");
+                    }
+                    else if (roles.Contains("Practitioner"))
+                    {
+                        return RedirectToAction("List", "Practitioner");
+                    }
+                    else if (roles.Contains("Billing"))
+                    {
+                        return RedirectToAction("List", "Billing");
+                    }
+                    else if (roles.Contains("Client"))
+                    {
+                        return RedirectToAction("List", "Client");
                     }
                     else
                     {
+                        // Default fallback (in case no role is matched)
                         return RedirectToAction("Index", "Home");
                     }
                 }
