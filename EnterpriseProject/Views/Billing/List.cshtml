@@ -1,0 +1,33 @@
+﻿<!--  show stuff about biling  
+  list view (billing)    GET DELETE, POST
+- bills, they come from clients paying
+- process action, does nothing :) a pop up!
+- action to open up individual bill page
+- action: deny
+-->
+
+
+<h1>Billing</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Client Name?</th>
+            <th>Bill Amount?</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var party in Model)
+        {
+            <tr>
+                <td>@party.Description</td>
+                <td>@party.PartyDate</td>
+                <td>
+                    <a asp-controller="Party" asp-action="Manage" asp-route-id="@party.ParID">Manage</a>
+                    <span class="px-2">|</span>
+                    <a asp-controller="Party" asp-action="Edit" asp-route-id="@party.ParID">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

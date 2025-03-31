@@ -1,0 +1,37 @@
+﻿<!--  show stuff about client appointments
+list view (your appointments) (client)                DELETE POST GET AppointmentView
+- list appoints for a given user
+- do actions, create / delete, pay (email, and adds it to billing list view)
+-->
+
+
+<h1>Appointments</h1>
+
+
+<a asp-controller="controllerhere" asp-action="actionhere">Create Appointment</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Appointment type?</th>
+            <th>Date</th>
+            <th>Doctor?</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var party in Model)
+        {
+            <tr>
+                <td>@party.Description</td>
+                <td>@party.PartyDate</td>
+                <td>@party.Location</td>
+                <td>
+                    <a asp-controller="controllerhere" asp-action="actionhere" asp-route-id="@party.ParID">Manage</a>
+                    <span class="px-2">|</span>
+                    <a asp-controller="controllerhere" asp-action="actionhere" asp-route-id="@party.ParID">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
