@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace EnterpriseProject.Entities
 {
-	public class User
-	{
+	public class User : IdentityUser
+    {
 		[Key]
 		public int UserId { get; set; }
 

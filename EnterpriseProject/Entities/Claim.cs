@@ -7,10 +7,10 @@ namespace EnterpriseProject.Entities
 	{
 		//Primary Key
 		[Key]
-		private int ClaimId { get; set; }
+		public int ClaimId { get; set; }
 
 		//Foreign Key
 		[ForeignKey("AppointmentId")]
-		private int AppointmentId { get; set; }
+        public int AppointmentId { get; set; }
 	}
 }
