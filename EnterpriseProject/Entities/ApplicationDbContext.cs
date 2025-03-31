@@ -32,22 +32,35 @@ namespace EnterpriseProject.Entities
             string password = "password";
             string roleName = "Admin";
 
-            // if role doesn't exist, create it
+            // If role doesn't exist, create it
             if (await roleManager.FindByNameAsync(roleName) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(roleName));
             }
-            // if username doesn't exist, create it and add it to role
+
+            // If username doesn't exist, create it and add it to the role
             if (await userManager.FindByNameAsync(username) == null)
             {
-                User user = new User { UserName = username };
+                User user = new User
+                {
+                    UserName = username,
+                    FirstName = "Admin",    // Set the FirstName
+                    LastName = "User",      // Set the LastName
+                    Email = "admin@example.com"  // You should also set Email as Identity requires it
+                };
+
                 var result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, roleName);
                 }
+                else
+                {
+                    // Handle the failure if needed
+                }
             }
         }
+
 
         public static async Task CreatePractitionerUser(IServiceProvider serviceProvider)
         {
@@ -60,15 +73,23 @@ namespace EnterpriseProject.Entities
             string password = "password";
             string roleName = "Practitioner";
 
-            // if role doesn't exist, create it
+            // If role doesn't exist, create it
             if (await roleManager.FindByNameAsync(roleName) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(roleName));
             }
-            // if username doesn't exist, create it and add it to role
+
+            // If username doesn't exist, create it and add it to the role
             if (await userManager.FindByNameAsync(username) == null)
             {
-                User user = new User { UserName = username };
+                User user = new User
+                {
+                    UserName = username,
+                    FirstName = "Doctor",    // Set FirstName
+                    LastName = "Smith",      // Set LastName
+                    Email = "doc@example.com" // Set Email
+                };
+
                 var result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
@@ -88,15 +109,23 @@ namespace EnterpriseProject.Entities
             string password = "password";
             string roleName = "Billing";
 
-            // if role doesn't exist, create it
+            // If role doesn't exist, create it
             if (await roleManager.FindByNameAsync(roleName) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(roleName));
             }
-            // if username doesn't exist, create it and add it to role
+
+            // If username doesn't exist, create it and add it to the role
             if (await userManager.FindByNameAsync(username) == null)
             {
-                User user = new User { UserName = username };
+                User user = new User
+                {
+                    UserName = username,
+                    FirstName = "Bill",     // Set FirstName
+                    LastName = "Johnson",   // Set LastName
+                    Email = "billing@example.com" // Set Email
+                };
+
                 var result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
@@ -104,7 +133,6 @@ namespace EnterpriseProject.Entities
                 }
             }
         }
-
         public static async Task CreateClientUser(IServiceProvider serviceProvider)
         {
             UserManager<User> userManager =
@@ -116,15 +144,23 @@ namespace EnterpriseProject.Entities
             string password = "password";
             string roleName = "Client";
 
-            // if role doesn't exist, create it
+            // If role doesn't exist, create it
             if (await roleManager.FindByNameAsync(roleName) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(roleName));
             }
-            // if username doesn't exist, create it and add it to role
+
+            // If username doesn't exist, create it and add it to the role
             if (await userManager.FindByNameAsync(username) == null)
             {
-                User user = new User { UserName = username };
+                User user = new User
+                {
+                    UserName = username,
+                    FirstName = "Client",   // Set FirstName
+                    LastName = "User",      // Set LastName
+                    Email = "client@example.com" // Set Email
+                };
+
                 var result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {

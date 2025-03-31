@@ -1,24 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace EnterpriseProject.Entities
 {
-	public class User : IdentityUser
+    public class User : IdentityUser
     {
-		[Key]
-		public int UserId { get; set; }
+        // UserId is not necessary, because IdentityUser already has an 'Id' property
+        // public int UserId { get; set; }  <-- This is redundant.
 
-		[Required(ErrorMessage = "Please enter your first name.")]
-		public string FirstName { get; set; }
+        [Required(ErrorMessage = "Please enter your first name.")]
+        public string FirstName { get; set; }
 
-		[Required(ErrorMessage = "Please enter your last name.")]
-		public string LastName { get; set; }
+        [Required(ErrorMessage = "Please enter your last name.")]
+        public string LastName { get; set; }
 
-		[Required(ErrorMessage = "Please enter your email address.")]
-		public string Email { get; set; }
+        // Email is already part of IdentityUser, so no need to redefine it.
+        // public string Email { get; set; }  <-- This is redundant.
 
-		[Required(ErrorMessage = "Please enter your password.")]
-		public string Password { get; set; }
-	}
+        // Password is not needed, as IdentityUser uses PasswordHash
+        // public string Password { get; set; }  <-- This is redundant.
+    }
 }
