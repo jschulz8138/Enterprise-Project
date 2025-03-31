@@ -3,13 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EnterpriseProject.Entities
 {
-    public class Practitioner
-    {
+	public class BnI
+	{
 		//Primary Key
 		[Key]
-		public int PractitionerId { get; set; }
+		public int BnIId { get; set; }
 
-		//Foreign Key
 		[ForeignKey("UserId")]
 		public int UserId { get; set; }
 
