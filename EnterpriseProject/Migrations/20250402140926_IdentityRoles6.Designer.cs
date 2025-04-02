@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnterpriseProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250402013058_MigrationName4")]
-    partial class MigrationName4
+    [Migration("20250402140926_IdentityRoles6")]
+    partial class IdentityRoles6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,13 +143,6 @@ namespace EnterpriseProject.Migrations
                         .IsUnique();
 
                     b.ToTable("Practitioners");
-
-                    b.HasData(
-                        new
-                        {
-                            PractitionerId = 1,
-                            UserId = 2
-                        });
                 });
 
             modelBuilder.Entity("EnterpriseProject.Entities.Schedule", b =>
@@ -276,72 +269,6 @@ namespace EnterpriseProject.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "14b1c451-e118-4a5b-aa50-fb867502a925",
-                            Email = "admin@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Justin",
-                            LastName = "Schulz",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "admin@example.com"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "cead51ae-4e60-4b44-b205-780ba199556d",
-                            Email = "doc@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Doctor",
-                            LastName = "Smith",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DOC@EXAMPLE.COM",
-                            NormalizedUserName = "DOC@EXAMPLE.COM",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "doc@example.com"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f5d26ac-ac4c-4a32-9035-3a5a8ed7ef68",
-                            Email = "billing@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Bill",
-                            LastName = "Johnson",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "BILLING@EXAMPLE.COM",
-                            NormalizedUserName = "BILLING@EXAMPLE.COM",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "billing@example.com"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "53765dc3-cc0b-46ed-b2b9-8d16d78571d5",
-                            Email = "client@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Client",
-                            LastName = "User",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "CLIENT@EXAMPLE.COM",
-                            NormalizedUserName = "CLIENT@EXAMPLE.COM",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "client@example.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -508,7 +435,7 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("EnterpriseProject.Entities.Admin", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -523,19 +450,19 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EnterpriseProject.Entities.TimeSlot", "TimeSlot")
                         .WithMany("Appointments")
                         .HasForeignKey("DateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EnterpriseProject.Entities.Practitioner", "Practitioner")
                         .WithMany()
                         .HasForeignKey("PractitionerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Claim");
@@ -552,7 +479,7 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("EnterpriseProject.Entities.BnI", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -563,7 +490,7 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("EnterpriseProject.Entities.Client", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -574,7 +501,7 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("EnterpriseProject.Entities.Practitioner", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");

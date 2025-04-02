@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnterpriseProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250402012526_MigrationName3")]
-    partial class MigrationName3
+    [Migration("20250402140714_IdentityRoles5")]
+    partial class IdentityRoles5
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,13 +143,6 @@ namespace EnterpriseProject.Migrations
                         .IsUnique();
 
                     b.ToTable("Practitioners");
-
-                    b.HasData(
-                        new
-                        {
-                            PractitionerId = 1,
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("EnterpriseProject.Entities.Schedule", b =>
@@ -276,24 +269,6 @@ namespace EnterpriseProject.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a357738f-3d46-4f20-9c0c-26c8e2e17c9b",
-                            Email = "admin@example.com",
-                            EmailConfirmed = false,
-                            FirstName = "Justin",
-                            LastName = "Schulz",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "admin@example.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -460,7 +435,7 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("EnterpriseProject.Entities.Admin", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -475,19 +450,19 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EnterpriseProject.Entities.TimeSlot", "TimeSlot")
                         .WithMany("Appointments")
                         .HasForeignKey("DateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EnterpriseProject.Entities.Practitioner", "Practitioner")
                         .WithMany()
                         .HasForeignKey("PractitionerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Claim");
@@ -504,7 +479,7 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("EnterpriseProject.Entities.BnI", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -515,7 +490,7 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("EnterpriseProject.Entities.Client", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -526,7 +501,7 @@ namespace EnterpriseProject.Migrations
                     b.HasOne("EnterpriseProject.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("EnterpriseProject.Entities.Practitioner", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");

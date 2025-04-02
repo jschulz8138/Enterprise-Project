@@ -57,14 +57,11 @@ using (var scope = scopeFactory.CreateScope())
     var serviceProvider = scope.ServiceProvider;
     var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
-    // Ensure the database is created and migrations are applied
-    dbContext.Database.Migrate();
-
     // Create the Admin user
-    await ApplicationDbContext.CreateAdminUser(serviceProvider);
-    await ApplicationDbContext.CreatePractitionerUser(serviceProvider);
-    await ApplicationDbContext.CreateBillingUser(serviceProvider);
-    await ApplicationDbContext.CreateClientUser(serviceProvider);
+    await ApplicationDbContext.CreateUser(serviceProvider, "doc", "password", "Practitioner");
+    await ApplicationDbContext.CreateUser(serviceProvider, "admin", "password", "Admin");
+    await ApplicationDbContext.CreateUser(serviceProvider, "client", "password", "Client");
+    await ApplicationDbContext.CreateUser(serviceProvider, "billing", "password", "Billing");
 }
 
 app.Run();

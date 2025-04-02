@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EnterpriseProject.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationName3 : Migration
+    public partial class IdentityRoles4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -105,8 +105,7 @@ namespace EnterpriseProject.Migrations
                         name: "FK_Admins_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -209,8 +208,7 @@ namespace EnterpriseProject.Migrations
                         name: "FK_BnIs_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -228,8 +226,7 @@ namespace EnterpriseProject.Migrations
                         name: "FK_Clients_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -247,8 +244,7 @@ namespace EnterpriseProject.Migrations
                         name: "FK_Practitioners_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -314,20 +310,17 @@ namespace EnterpriseProject.Migrations
                         name: "FK_Appointments_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
-                        principalColumn: "ClientId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ClientId");
                     table.ForeignKey(
                         name: "FK_Appointments_Practitioners_PractitionerId",
                         column: x => x.PractitionerId,
                         principalTable: "Practitioners",
-                        principalColumn: "PractitionerId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PractitionerId");
                     table.ForeignKey(
                         name: "FK_Appointments_TimeSlot_DateId",
                         column: x => x.DateId,
                         principalTable: "TimeSlot",
-                        principalColumn: "TimeSlotId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TimeSlotId");
                 });
 
             migrationBuilder.InsertData(
@@ -340,16 +333,6 @@ namespace EnterpriseProject.Migrations
                     { 3, null, "Client", "CLIENT" },
                     { 4, null, "Billing", "BILLING" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "a357738f-3d46-4f20-9c0c-26c8e2e17c9b", "admin@example.com", false, "Justin", "Schulz", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", null, null, false, null, false, "admin@example.com" });
-
-            migrationBuilder.InsertData(
-                table: "Practitioners",
-                columns: new[] { "PractitionerId", "UserId" },
-                values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Admins_UserId",
