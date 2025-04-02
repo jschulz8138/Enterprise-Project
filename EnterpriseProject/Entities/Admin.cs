@@ -10,5 +10,6 @@ namespace EnterpriseProject.Entities
 
         [ForeignKey("UserId")]
         public int UserId { get; set; }
+        public User User { get; set; }  // Navigation property
     }
 }

@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace EnterpriseProject.Entities
 {
-    public class User : IdentityUser
+    public class User : IdentityUser<int>
     {
-        // UserId is not necessary, because IdentityUser already has an 'Id' property
-        // public int UserId { get; set; }  <-- This is redundant.
 
         [Required(ErrorMessage = "Please enter your first name.")]
         public string FirstName { get; set; }

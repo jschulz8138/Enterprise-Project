@@ -13,6 +13,7 @@ namespace EnterpriseProject.Entities
 		[ForeignKey("UserId")]
 		public int UserId { get; set; }
 
-		//Additional Attributes
-	}
+        //Additional Attributes
+        public User User { get; set; }  // Navigation property
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace EnterpriseProject.Models
 {
@@ -17,6 +18,11 @@ namespace EnterpriseProject.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public string? ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Please enter a user type")]
+        public string UserType { get; set; }
+
+        public List<SelectListItem> UserTypes { get; set; } // For the dropdown
 
     }
 }

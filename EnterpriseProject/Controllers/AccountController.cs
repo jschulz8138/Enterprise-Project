@@ -4,6 +4,7 @@ using EnterpriseProject.Entities;
 using EnterpriseProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EnterpriseProject.Controllers
 {
@@ -19,6 +20,47 @@ namespace EnterpriseProject.Controllers
             _logger = logger;
             _signInManager = signInManager;
             _userManager = userManager;
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            var model = new RegisterViewModel
+            {
+                UserTypes = new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Practitioner", Value = "Practitioner" },
+                    new SelectListItem { Text = "Client", Value = "Client" },
+                    new SelectListItem { Text = "Admin", Value = "Admin" },
+                    new SelectListItem { Text = "Billing", Value = "Billing" }
+                }
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.Username };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+
+            return View(model);
         }
 
         [HttpGet]
